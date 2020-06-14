@@ -1,4 +1,4 @@
-# This is basically pulled from Home Assistant's docs.
+# Pulled from https://www.home-assistant.io/docs/installation/docker/#docker-compose
 version: '3'
 services:
     homeassistant:
