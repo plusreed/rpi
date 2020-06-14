@@ -1,0 +1,12 @@
+# This is basically pulled from Home Assistant's docs.
+version: '3'
+services:
+    homeassistant:
+        container_name: home-assistant
+        image: homeassistant/home-assistant:latest
+        volumes:
+            - /home/pi/hass:/config
+        environment:
+            - TZ=America/New_York
+        restart: always
+        network_mode: host
