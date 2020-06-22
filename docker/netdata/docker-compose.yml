@@ -8,6 +8,8 @@ services:
     ports:
       - 19999:19999
     restart: unless-stopped
+    environment:
+      - DOCKER_HOST=proxy:2375
     cap_add:
       - SYS_PTRACE
     security_opt:
@@ -20,6 +22,15 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /etc/os-release:/host/etc/os-release:ro
+  proxy:
+    container_name: netdata_docker_proxy
+    image: iamthefij/docker-socket-proxy:linux-arm64
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 2375:2375
+    environment:
+      - CONTAINERS=1
 
 volumes:
   netdatalib:
