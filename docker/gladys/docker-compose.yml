@@ -1,0 +1,23 @@
+version: '3'
+services:
+  gladys:
+    container_name: gladys
+    image: gladysassistant/gladys:4.0.0-beta-arm
+    restart: always
+    privileged: true
+    network_mode: host
+    environment:
+      - NODE_ENV=production
+      - SERVER_PORT=8025
+      - TZ=America/New_York
+      - SQLITE_FILE_PATH=/var/lib/gladysassistant/gladys-production.db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/gladysassistant:/var/lib/gladysassistant
+      - /dev:/dev
+  watchtower:
+    container_name: gladys_watchtower
+    restart: always
+    image: containrrr/watchtower:armhf-latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
